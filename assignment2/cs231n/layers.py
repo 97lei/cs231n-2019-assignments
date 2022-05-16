@@ -127,41 +127,39 @@ def relu_backward(dout, cache):
 
 def batchnorm_forward(x, gamma, beta, bn_param):
     """
-    Forward pass for batch normalization.
+    批处理规范化的前向传递
 
-    During training the sample mean and (uncorrected) sample variance are
-    computed from minibatch statistics and used to normalize the incoming data.
-    During training we also keep an exponentially decaying running mean of the
-    mean and variance of each feature, and these averages are used to normalize
-    data at test-time.
+    在训练期间，样本均值和(未校正的)样本方差从小批量统计中计算，并用于归一化传入数据。
+    在训练期间，我们还保持每个特征的均值和方差的指数衰减的运行均值，
+    这些平均值用于测试时的数据归一化。
 
-    At each timestep we update the running averages for mean and variance using
-    an exponential decay based on the momentum parameter:
+    在每个时间步，我们使用更新平均值和方差的运行平均值
+    基于动量参数的指数衰减:
 
-    running_mean = momentum * running_mean + (1 - momentum) * sample_mean
-    running_var = momentum * running_var + (1 - momentum) * sample_var
+    Running_mean =动量* Running_mean +(1 -动量)* sample_mean
+    Running_var =动量* Running_var +(1 -动量)* sample_var
 
-    Note that the batch normalization paper suggests a different test-time
-    behavior: they compute sample mean and variance for each feature using a
-    large number of training images rather than using a running average. For
-    this implementation we have chosen to use running averages instead since
-    they do not require an additional estimation step; the torch7
-    implementation of batch normalization also uses running averages.
+    请注意，批处理规范化文件建议使用不同的测试时间
+    行为:他们计算每个特征的样本均值和方差使用
+    大量的训练图像而不是使用跑步平均值。为
+    在这个实现中，我们选择使用平均值来代替
+    它们不需要额外的估计步骤;的torch7
+    批处理规范化的实现也使用运行平均值。
 
-    Input:
-    - x: Data of shape (N, D)
-    - gamma: Scale parameter of shape (D,)
-    - beta: Shift paremeter of shape (D,)
-    - bn_param: Dictionary with the following keys:
-      - mode: 'train' or 'test'; required
-      - eps: Constant for numeric stability
-      - momentum: Constant for running mean / variance.
-      - running_mean: Array of shape (D,) giving running mean of features
-      - running_var Array of shape (D,) giving running variance of features
+    输入:
+    - x:形状(N, D)的数据
+    - gamma:形状的尺度参数(D，)
+    - beta:形状的偏移参数(D，)
+    —bn_param:带有以下键的字典:
+    - mode: 'train'或'test'要求
+    - eps:数值稳定的常数
+    -动量:运行平均值/方差的常数。
+    - running_mean:形状(D，)的数组，给出特征的运行平均值
+    - running_var数组的形状(D，)给出运行方差的特征
 
-    Returns a tuple of:
-    - out: of shape (N, D)
-    - cache: A tuple of values needed in the backward pass
+返回一个元组:
+- out:变形(N, D)
+—cache:向后传递需要的值的元组
     """
     mode = bn_param['mode']
     eps = bn_param.get('eps', 1e-5)
@@ -174,25 +172,25 @@ def batchnorm_forward(x, gamma, beta, bn_param):
     out, cache = None, None
     if mode == 'train':
         #######################################################################
-        # TODO: Implement the training-time forward pass for batch norm.      #
-        # Use minibatch statistics to compute the mean and variance, use      #
-        # these statistics to normalize the incoming data, and scale and      #
-        # shift the normalized data using gamma and beta.                     #
+        #待办事项:实施批次规范的培训时间前转。＃
+        #使用小批量统计数据计算平均值和方差，使用#
+        #这些统计数据来规范化传入的数据，并缩放和#
+        #使用gamma和beta移位规范化数据。＃
         #                                                                     #
-        # You should store the output in the variable out. Any intermediates  #
-        # that you need for the backward pass should be stored in the cache   #
-        # variable.                                                           #
+        #你应该将输出存储在变量out中。任何中间体#
+        #应该存储在缓存#中
+        #变量。＃
         #                                                                     #
-        # You should also use your computed sample mean and variance together #
-        # with the momentum variable to update the running mean and running   #
-        # variance, storing your result in the running_mean and running_var   #
-        # variables.                                                          #
+        #你也应该使用你的计算样本均值和方差一起#
+        #与动量变量一起更新运行平均值和运行#
+        # variance，将结果存储在running_mean和running_var #中
+        #变量。＃
         #                                                                     #
-        # Note that though you should be keeping track of the running         #
-        # variance, you should normalize the data based on the standard       #
-        # deviation (square root of variance) instead!                        # 
-        # Referencing the original paper (https://arxiv.org/abs/1502.03167)   #
-        # might prove to be helpful.                                          #
+        #注意，虽然你应该跟踪运行#
+        # variance，您应该根据标准#规范化数据
+        #改为# deviation(方差的平方根)!＃
+        #引用原文(https://arxiv.org/abs/1502.03167) #
+        #可能会有帮助。                    #
         #######################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
